@@ -12,12 +12,15 @@ Vagrant.configure("2") do |config|
       vb.memory = 4096
       vb.cpus = 2
     end
-#    machine.vm.provision "shell", inline: <<-SHELL
-#      rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm
-#      yum install -y puppetserver vim
+    machine.vm.provision "shell", inline: <<-SHELL
+      yum makecache fast
+      yum install -y puppet
 #      echo "192.168.33.10    puppet-master puppet-master.minsk.epam.com" >> /etc/hosts
 #      echo "192.168.33.15    puppet-node puppet-node.minsk.epam.com" >> /etc/hosts
-#    SHELL
+    SHELL
+    machine.vm.provision "puppet" do | puppet |
+      puppet.module_path = "modules"
+    end
   end
 
   config.vm.define "puppet-node" do | machine |
@@ -29,11 +32,14 @@ Vagrant.configure("2") do |config|
       vb.memory = "1024"
       vb.cpus = 1
     end
-#    machine.vm.provision "shell", inline: <<-SHELL
-#      rpm -ivh https://yum.puppetlabs.com/puppetlabs-release-pc1-el-6.noarch.rpm
-#      yum install -y puppet vim
+    machine.vm.provision "shell", inline: <<-SHELL
+      yum makecache fast
+      yum install -y puppet
 #      echo "192.168.33.10    puppet-master puppet-master.minsk.epam.com" >> /etc/hosts
 #      echo "192.168.33.15    puppet-node puppet-node.minsk.epam.com" >> /etc/hosts
-#    SHELL
+    SHELL
+    machine.vm.provision "puppet" do | puppet |
+      puppet.module_path = "modules"
+    end
   end
 end
