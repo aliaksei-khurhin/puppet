@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |config|
 
   config.vm.define "puppet-master" do | machine |
-    machine.vm.box = "sbeliakou_centos-7.2-x86_64"
+    machine.vm.box = "sbeliakou/centos-7.2-x86_64"
     machine.vm.hostname = "puppet-master.minsk.epam.com"
     machine.vm.network :private_network, ip: "192.168.33.10"
     machine.vm.provider "virtualbox" do |vb|
@@ -25,8 +25,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "puppet-node" do | machine |
-    machine.vm.box = "sbeliakou_centos-7.2-x86_64"
-    machine.vm.hostname = "puppet-node"
+    machine.vm.box = "sbeliakou/centos-7.2-x86_64"
+    machine.vm.hostname = "puppet-node.minsk.epam.com"
     machine.vm.network :private_network, ip: "192.168.33.15"
     machine.vm.provider "virtualbox" do |vb|
       vb.name = machine.vm.hostname
