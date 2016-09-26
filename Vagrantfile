@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "puppet-master" do | machine |
     machine.vm.box = "sbeliakou_centos-7.2-x86_64"
-    machine.vm.hostname = "puppet-master"
+    machine.vm.hostname = "puppet-master.minsk.epam.com"
     machine.vm.network :private_network, ip: "192.168.33.10"
     machine.vm.provider "virtualbox" do |vb|
       vb.name = machine.vm.hostname
@@ -13,6 +13,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 2
     end
     machine.vm.provision "shell", inline: <<-SHELL
+      systemctl restart network.service
       yum makecache fast
       yum install -y puppet
 #      echo "192.168.33.10    puppet-master puppet-master.minsk.epam.com" >> /etc/hosts
@@ -33,6 +34,7 @@ Vagrant.configure("2") do |config|
       vb.cpus = 1
     end
     machine.vm.provision "shell", inline: <<-SHELL
+      systemctl restart network.service
       yum makecache fast
       yum install -y puppet
 #      echo "192.168.33.10    puppet-master puppet-master.minsk.epam.com" >> /etc/hosts
