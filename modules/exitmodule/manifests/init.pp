@@ -43,7 +43,7 @@
 # Copyright 2016 Your name here, unless otherwise noted.
 #
 class exitmodule {
-  if $::hostname == 'puppet-master' {
+  if $::hostname == 'puppet' {
     include exitmodule::master
   }
   else {
